@@ -9,10 +9,8 @@ def dict_merge(parent_dic, added_dic):
         parent_dic[obj]=added_dic.get(obj)
     return parent_dic
 
-
 def changetoint(dataframe, columnlist):
     dataframe[columnlist] = dataframe[columnlist].fillna(0.0).astype(int)
-
 
 def available_races(tree):
     election_types = ['General', 'Primary', 'Special_General', 'Special_Primary', 'Special']
@@ -157,8 +155,11 @@ nra_grade_columns = ['state', 'year', 'race', 'date', 'level', 'contest', 'distr
                      'party', 'current_status', 'endorsed', 'grade']
 nra_grades = cdf(nra_grade_columns)
 
+print('Created NRA df.')
+
 run_log_columns = ['runtime', 'records', 'next_run']
 run_log = cdf(run_log_columns)
+print('Created run log columns.')
 
 client = civis.APIClient()
 db_id = client.get_database_id('Everytown for Gun Safety')
@@ -226,10 +227,13 @@ day = pad(day)
 date_of_run = (str(ryear) + '-' + month + '-' + day)
 nextrun = date_of_run + ' ' + time_of_run
 
+print('Determined next run time: {}.'.format(nextrun))
 
+print('Getting states.')
 states = civis.io.read_civis(table='legiscan.ls_state',
                              database='Everytown for Gun Safety', use_pandas=True)
 state_record_dic = states.to_dict('records')
+print('Retrieving state records.')
 
 state_ids = {}
 for record in state_record_dic:
