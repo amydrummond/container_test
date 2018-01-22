@@ -1,3 +1,4 @@
+print('Script started.')
 import requests, random, time, pandas as pd, civis, datetime, os, sys
 import lxml.html as LH
 
