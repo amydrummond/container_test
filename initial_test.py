@@ -162,7 +162,7 @@ run_log_columns = ['runtime', 'records', 'next_run']
 run_log = cdf(run_log_columns)
 print('Created run log columns.')
 
-state_time = ['runtime', 'state']
+state_time_col = ['runtime', 'state']
 
 client = civis.APIClient()
 db_id = client.get_database_id('Everytown for Gun Safety')
@@ -244,7 +244,7 @@ for record in state_record_dic:
 
 for state in list(state_ids.keys()):
     print('Now working on {}.'.format(state))
-    cdf(state_time)
+    state_time = cdf(state_time_col)
     state_time = state_time.append({'runtime' : now(), 'state' : state}, ignore_index=True)
     import_update = civis.io.dataframe_to_civis(df=state_time, database = db_id,
                                                  table='amydrummond.state_update_log', max_errors = 2,
