@@ -162,6 +162,8 @@ run_log_columns = ['runtime', 'records', 'next_run']
 run_log = cdf(run_log_columns)
 print('Created run log columns.')
 
+state_time = ['runtime', 'state']
+
 client = civis.APIClient()
 db_id = client.get_database_id('Everytown for Gun Safety')
 
@@ -242,6 +244,12 @@ for record in state_record_dic:
 
 for state in list(state_ids.keys()):
     print('Now working on {}.'.format(state))
+    cdf(state_time)
+    state_time = state_time.append({'runtime' : now(), 'state' : state}, ignore_index=True)
+    import_update = civis.io.dataframe_to_civis(df=state_time, database = db_id,
+                                                 table='amydrummond.state_update_log', max_errors = 2,
+                                                 existing_table_rows = 'append', polling_interval=10)
+    civis_upload_status(import_update, 'state log')
     url = 'https://www.nrapvf.org/grades/archive/' + state.replace(' ', '%20')
     try:
         r = requests.get(url)
