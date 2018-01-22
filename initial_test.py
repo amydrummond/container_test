@@ -1,4 +1,5 @@
-import requests, random, time, pandas, civis, datetime, os, sys
+import requests, random, time, pandas, civis, datetime, os, sys, probablepeople
+
 
 client = civis.APIClient()
 db_id = client.get_database_id('Everytown for Gun Safety')
@@ -33,19 +34,23 @@ def civis_upload_status(civis_upload, data_name='data'):
     else:
         print("New {} has been uploaded to Civis Platform.".format(data_name))
 
-s_cols = ['name', 'abbreviation', 'timestamp']
-test_upload = cdf(s_cols)
 
-states = civis.io.read_civis(table='legiscan.ls_state',
+name_cols = ['full_name', 'response', 'timestamp']
+
+test_upload = cdf(name_cols)
+
+nra_names = civis.io.read_civis(table=' state_leg_build.nra_grades',
                              database='Everytown for Gun Safety', use_pandas=True)
-state_record_dic = states.to_dict('records')
+nra_names_dic = nra_names.to_dict('records')
 
+print('NRA names retrieved.')
 
-for record in state_record_dic:
-    n = record.get('state_name')
-    a = record.get('state_abbr')
+for record in nra_names_dic:
+    full_name = record.get('name')
+    parsed = probablepeople.parse(full_name)
     t = now()
-    test_upload = test_upload.append({'name' : n, 'abbreviation' : a, 'timestamp' : t},
+    test_upload = test_upload.append({'full_name' : full_name,
+                                      'response' : parsed, 'timestamp' : t},
                                      ignore_index=True)
 
 print("Uploading to Civis.")
