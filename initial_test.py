@@ -48,7 +48,7 @@ for record in state_record_dic:
     test_upload = test_upload.append({'name' : n, 'abbreviation' : a, 'timestamp' : t},
                                      ignore_index=True)
 
-    print("Uploading to Civis.")
+print("Uploading to Civis.")
 print('Now uploading session changes. There are {} records.'.format(len(test_upload)))
 import_summary = civis.io.dataframe_to_civis(df=test_upload, database = db_id, table='amydrummond.test_upload',
                                              max_errors = 2,existing_table_rows = 'drop', polling_interval=10)
