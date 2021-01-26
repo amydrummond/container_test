@@ -178,7 +178,9 @@ with ZipFile(zippedfile, mode='r') as zf:
 
    for message_file in zf.namelist():
        message_id = message_file[(message_file.find('/')) + 1:]
+       print(message_id)
        if len(message_id) > 1 and message_id[0] != '$' and message_id not in existing_files:
+           print('continue') 
        #for message_file in ['files2/a36f5e2adfd045dfa4bccb08a7c58b0c']:
            message_id = ''
            pull_time = ''
@@ -432,6 +434,7 @@ with ZipFile(zippedfile, mode='r') as zf:
                    write.writerow(post_row)
        else:
            skipped_message +=1
+           print(skipped.) 
            if skipped_message % 10000 == 0:
                out = now() + ' There now have been ' + str(skipped_message) + ' of ' + str(total_messages) + ' files that have been skipped.\n'
                print(out)
