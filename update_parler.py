@@ -438,3 +438,4 @@ with ZipFile(zippedfile, mode='r') as zf:
                with open('log.txt', 'a') as writer:
                    writer.write(out)
           
+out = now() + ' This run is finished. '
