@@ -136,7 +136,7 @@ with open('comments.csv') as csvfile:
     for row in reader:
         for name in reader.fieldnames:
             comments_dic[name].append(row[name])
-current_comment_number = int(max(comments_dic.get('comment_id'))) +1
+current_comment_number = max(comments_dic.get('comment_id')) +1
 del comments_dic
 
 with open('replies.csv') as csvfile:
@@ -146,7 +146,7 @@ with open('replies.csv') as csvfile:
         for name in reader.fieldnames:
             replies_dic[name].append(row[name])
 
-current_reply_number = int(max(replies_dic.get('reply_id'))) +1
+current_reply_number = max(replies_dic.get('reply_id')) +1
 del replies_dic
 
 with open('media.csv') as csvfile:
@@ -168,7 +168,7 @@ with open('websites.csv') as csvfile:
 
 max_website = max(media_dic.get('website_id'))
 
-current_media_number = int(max([max_website, max_media])) + 1
+current_media_number = max([max_website, max_media]) + 1
 
 
 
@@ -176,43 +176,43 @@ current_media_number = int(max([max_website, max_media])) + 1
 with ZipFile(zippedfile, mode='r') as zf:
 
    for message_file in zf.namelist():
-   #for message_file in ['files2/a36f5e2adfd045dfa4bccb08a7c58b0c']:
-       message_id = ''
-       pull_time = ''
-       post_timestamp = ''
-       post_author = ''
-       post_user = ''
-       body = ''
-       post_impressions = ''
-       post_comments = ''
-       post_echoes = ''
-       post_upvotes =''
-       echo_name = ''
-       echo_user = ''
-       echo_timestamp = ''
-       echo_impressions = ''
-       comment_user_name = ''
-       comment_userid = ''
-       comment_timestamp = ''
-       comment_body = ''
-       comment_reply_count = ''
-       comment_echoes_count = ''
-       comment_upvotes_count = ''
-       echo = ''
-       echo_body = ''
-       post_body = ''
-
-
-       total_messages = len(zf.namelist())
-       with zf.open(message_file, 'r') as f:
-           if this_message % 10000 == 0:
-               out = now() + ' Working on file number ' + str(this_message) + ' of ' + str(total_messages) + '.\n'
-               print(out)
-               with open ('log.txt', 'a') as writer:
-                   writer.write(out)
-           this_message += 1
-           message_id = message_file[(message_file.find('/') )+ 1:]
-           if len(message_id) > 1 and message_id[0]!='$' and message_id not in existing_files :
+       message_id = message_file[(message_file.find('/')) + 1:]
+       if len(message_id) > 1 and message_id[0] != '$' and message_id not in existing_files:
+       #for message_file in ['files2/a36f5e2adfd045dfa4bccb08a7c58b0c']:
+           message_id = ''
+           pull_time = ''
+           post_timestamp = ''
+           post_author = ''
+           post_user = ''
+           body = ''
+           post_impressions = ''
+           post_comments = ''
+           post_echoes = ''
+           post_upvotes =''
+           echo_name = ''
+           echo_user = ''
+           echo_timestamp = ''
+           echo_impressions = ''
+           comment_user_name = ''
+           comment_userid = ''
+           comment_timestamp = ''
+           comment_body = ''
+           comment_reply_count = ''
+           comment_echoes_count = ''
+           comment_upvotes_count = ''
+           echo = ''
+           echo_body = ''
+           post_body = ''
+    
+    
+           total_messages = len(zf.namelist())
+           with zf.open(message_file, 'r') as f:
+               if this_message % 10000 == 0:
+                   out = now() + ' Working on file number ' + str(this_message) + ' of ' + str(total_messages) + '.\n'
+                   print(out)
+                   with open ('log.txt', 'a') as writer:
+                       writer.write(out)
+               this_message += 1
                info = zf.getinfo(message_file)
                message_file_name = info.filename
                pull_time = format_time(info.date_time)
