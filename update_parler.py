@@ -91,7 +91,7 @@ def strip_tracking(url):
 
 
 
-zippedfile = 'parler_2020-01-06-partial.zip'
+zippedfile = 'parler_2020-01-06_posts-partial.zip'
 
 post_fields = ['file', 'date_pulled', 'timestamp', 'author_name', 'author_username', 'content', 'impressions',
                'comments', 'echos', 'upvotes', 'echo statement' 'echoed_by' ,'echo_username', 'echo_timestamp',
