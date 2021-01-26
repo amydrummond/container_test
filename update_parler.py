@@ -434,7 +434,7 @@ with ZipFile(zippedfile, mode='r') as zf:
                    write.writerow(post_row)
        else:
            skipped_message +=1
-           print(skipped.) 
+           print('skipped - .' +str(skipped_message)) 
            if skipped_message % 10000 == 0:
                out = now() + ' There now have been ' + str(skipped_message) + ' of ' + str(total_messages) + ' files that have been skipped.\n'
                print(out)
