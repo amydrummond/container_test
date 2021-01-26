@@ -136,7 +136,7 @@ with open('comments.csv') as csvfile:
     for row in reader:
         for name in reader.fieldnames:
             comments_dic[name].append(row[name])
-current_comment_number = max(comments_dic.get('comment_id')) +1
+current_comment_number = int(max(comments_dic.get('comment_id'))) +1
 del comments_dic
 
 with open('replies.csv') as csvfile:
@@ -146,7 +146,7 @@ with open('replies.csv') as csvfile:
         for name in reader.fieldnames:
             replies_dic[name].append(row[name])
 
-current_reply_number = max(replies_dic.get('reply_id')) +1
+current_reply_number = int(max(replies_dic.get('reply_id'))) +1
 del replies_dic
 
 with open('media.csv') as csvfile:
@@ -168,7 +168,7 @@ with open('websites.csv') as csvfile:
 
 max_website = max(media_dic.get('website_id'))
 
-current_media_number = max([max_website, max_media]) + 1
+current_media_number = int(max([max_website, max_media])) + 1
 
 
 
