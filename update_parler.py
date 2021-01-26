@@ -183,7 +183,6 @@ with ZipFile(zippedfile, mode='r') as zf:
        if len(message_id) > 1 and message_id[0] != '$' and message_id not in existing_files:
            print('continue') 
        #for message_file in ['files2/a36f5e2adfd045dfa4bccb08a7c58b0c']:
-           message_id = ''
            pull_time = ''
            post_timestamp = ''
            post_author = ''
