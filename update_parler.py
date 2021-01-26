@@ -175,6 +175,7 @@ current_media_number = int(max([max_website, max_media])) + 1
 
 
 with ZipFile(zippedfile, mode='r') as zf:
+   total_messages = len(zf.namelist())
 
    for message_file in zf.namelist():
        message_id = message_file[(message_file.find('/')) + 1:]
@@ -207,8 +208,6 @@ with ZipFile(zippedfile, mode='r') as zf:
            echo_body = ''
            post_body = ''
 
-
-           total_messages = len(zf.namelist())
            with zf.open(message_file, 'r') as f:
                if this_message % 10000 == 0:
                    out = now() + ' Working on file number ' + str(this_message) + ' of ' + str(total_messages) + '.\n'
