@@ -171,13 +171,12 @@ max_website = max(media_dic.get('website_id'))
 
 current_media_number = int(max([max_website, max_media])) + 1
 
-
-
+del media_dic
 
 with ZipFile(zippedfile, mode='r') as zf:
-   total_messages = len(zf.namelist())
-
-   for message_file in zf.namelist():
+   file_names = zf.namelist()
+   total_messages = len(file_name)
+   for message_file in file_names:
        message_id = message_file[(message_file.find('/')) + 1:]
        print(message_id)
        if len(message_id) > 1 and message_id[0] != '$' and message_id not in existing_files:
