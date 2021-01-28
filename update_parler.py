@@ -112,7 +112,7 @@ website_fields = ['website_id', 'source_table', 'source_id', 'echo', 'type', 'ti
 #current_media_number = 1000000
 
 
-
+print('reading posts')
 with open('posts.csv') as csvfile:
     reader = csv.DictReader(csvfile, skipinitialspace=True)
     posts_dic = {name: [] for name in reader.fieldnames}
@@ -120,7 +120,10 @@ with open('posts.csv') as csvfile:
         for name in reader.fieldnames:
             posts_dic[name].append(row[name])
 
+print('posts read')
 existing_files = posts_dic.get('file')
+existing_files[:] = (value for value in existing_files if value != '')
+print('blanks removed')
 this_message = len(existing_files)
 skipped_message = 0
 
@@ -174,6 +177,7 @@ current_media_number = int(max([max_website, max_media])) + 1
 del media_dic
 
 with ZipFile(zippedfile, mode='r') as zf:
+   print('zipfile open') 
    file_names = zf.namelist()
    file_names.reverse()
    total_messages = len(file_names)
