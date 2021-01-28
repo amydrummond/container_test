@@ -175,7 +175,7 @@ del media_dic
 
 with ZipFile(zippedfile, mode='r') as zf:
    file_names = zf.namelist()
-   file_names = file_names.reverse()
+   file_names.reverse()
    total_messages = len(file_names)
    for message_file in file_names:
        message_id = message_file[(message_file.find('/')) + 1:]
